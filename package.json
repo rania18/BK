@@ -1,0 +1,27 @@
+{
+  "name": "dnl",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "DNL Deco Numérique et Lazer",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --experimental-modules index.js",
+    "dev": "nodemon --watch * --exec node --experimental-modules index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.13",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "eslint": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "nodemon": "^2.0.7"
+  }
+}
