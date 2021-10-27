@@ -1,28 +1,22 @@
-import { BLOG_DETAILS_FAIL, BLOG_DETAILS_REQUEST, BLOG_DETAILS_SUCCESS, BLOG_LIST_FAIL, BLOG_LIST_REQUEST, BLOG_LIST_SUCCESS } from "../constants/blogConstants";
+import { END_LOADING_BLOG, LIST_BLOGS, ONE_BLOG, ONE_BLOG_END_LOADING, ONE_BLOG_LOADING, START_LOADING_BLOG } from "../constants/actionTypes";
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default (state = { loading: true, blog: [] }, action) =>{
-    switch(action.type){
-        case BLOG_LIST_REQUEST:
-            return {loading: true};
-        case BLOG_LIST_SUCCESS:
-            return {loading: false, blog: action.payload};
-        case BLOG_LIST_FAIL:
-            return {loading: false, error: action.payload};
+const blogReducers = (state = { OneBlogIsLoading: true, BlogsIsLoading: true, blogs: [], blog: {} }, action) => {
+    switch (action.type) {
+        case START_LOADING_BLOG:
+            return { ...state, BlogsIsLoading: true };
+        case END_LOADING_BLOG:
+            return { ...state, BlogsIsLoading: false };
+        case ONE_BLOG_LOADING:
+            return { ...state, OneBlogIsLoading: true };
+        case ONE_BLOG_END_LOADING:
+            return { ...state, OneBlogIsLoading: false };
+        case LIST_BLOGS:
+            return { ...state, blogs: action.payload };
+        case ONE_BLOG:
+            return { ...state, blog: action.payload.data };
         default:
-            return state;
+        return state;
     }
-}
+  };
 
-export const blogDetailsReducer = (state = { loading: true, blog: {} }, action) =>{
-    switch(action.type){
-        case BLOG_DETAILS_REQUEST:
-            return {loading: true};
-        case BLOG_DETAILS_SUCCESS:
-            return {loading: false, blog: action.payload};
-        case BLOG_DETAILS_FAIL:
-            return {loading: false, error: action.payload};
-        default:
-            return state;
-    }
-}
+  export default blogReducers;

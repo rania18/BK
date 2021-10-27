@@ -12,77 +12,79 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts, deleteProduct } from '../../../actions/productActions';
 import LoadingModule from '../LoadingModule';
-import ErrorPage from '../ErrorPage';
 import ConfirmModal from './ConfirmModal'
-
+import ProductModal from './ProductModal'
+import { getCategories } from '../../../actions/categoryActions';
+import { Container } from '@material-ui/core';
 
 export default function ProductsList() {
 
     const dispatch = useDispatch();
-    const productList = useSelector( state => state.productList);
-    const {loading, error, products} = productList;
+    const {ProductsIsLoading, products} = useSelector( state => state.products);
+    const {CategoriesIsLoading, categories} = useSelector( state => state.categories);
+
     const [show, setShow] = useState(false);
     const [productId, setId] = useState('');
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
     const deleteAction = () => {
        dispatch(deleteProduct(productId));
        setShow(false);
-       window.location.reload();
     }
 
     useEffect(() => {
         dispatch(getProducts());
-    }, [dispatch]);
-    
-    if (loading) {
+        dispatch(getCategories());
+    }, []);
 
-        return ( <LoadingModule></LoadingModule> );
-    
-    } else if (error) {
+    if (ProductsIsLoading || CategoriesIsLoading) { return ( <LoadingModule></LoadingModule> ); } 
 
-        return ( <ErrorPage msg={error}></ErrorPage> );
-
-    } else {
         return (
             <React.Fragment>
               <div className='table-header-container'>
                 <Title>Products</Title>
-                <button><Link to='/admin/products/new'>
-                    <AddCircleIcon color='primary' style={{ fontSize: 50 }} /></Link>
+                <button>
+                    <AddCircleIcon color='primary' style={{ fontSize: 50 }} onClick={() => {setSelectedProduct(null); setShowModal(true)}} />
                 </button>
               </div>
-             
-              <Table size="small">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Image</TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Category</TableCell>
-                    <TableCell>Price</TableCell>
-                    <TableCell align="right">Actions</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {products.map((row) => (
-                      <TableRow key={row._id}>
-                          <TableCell><img src={row.image} alt='Product' className="product-img-table" /></TableCell>
-                          <TableCell>{row.name}</TableCell>
-                          <TableCell>{row.categorySlug}</TableCell>
-                          <TableCell>{row.price}</TableCell>
-                          <TableCell align="right" className='admin-actions'>
-                              <Link to={`/admin/products/${row._id}`}><EditIcon /></Link>
-                              <button 
-                              onClick={ () => {
-                                setShow(true)
-                                setId(row._id)
-                              }} 
-                              className='delete-btn' 
-                              ><DeleteForeverIcon /></button>
-                          </TableCell>
-                      </TableRow>
-                  ))}
-                  </TableBody>
-              </Table>
+              <div className='table'>
+                <Table size="small">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Image</TableCell>
+                      <TableCell>Name</TableCell>
+                      <TableCell>Category</TableCell>
+                      <TableCell>Price</TableCell>
+                      <TableCell>Availability</TableCell>
+                      <TableCell align="right">Actions</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {products?.map((row) => (
+                        <TableRow key={row._id}>
+                            <TableCell><img src={row.image} alt='Product' className="product-img-table" /></TableCell>
+                            <TableCell>{row.name}</TableCell>
+                            <TableCell>{row.category.title}</TableCell>
+                            <TableCell>{row.price}</TableCell>
+                            <TableCell>{row.availability}</TableCell>
+                            <TableCell align="right" className='admin-actions'>
+                                <EditIcon onClick={() => {setSelectedProduct(row); setShowModal(true)}} style={{color:'#5bb56e'}} />
+                                <button 
+                                onClick={ () => {
+                                  setShow(true)
+                                  setId(row._id)
+                                }} 
+                                className='delete-btn' 
+                                ><DeleteForeverIcon style={{color:'red'}} /></button>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                    </TableBody>
+                </Table>
+              </div>
+                <ProductModal categories={categories} products={products} product={selectedProduct} showModal={showModal} closeModal={() => setShowModal(false)} />
+          
               <ConfirmModal 
                 show={show} 
                 qst="Delete Product"
@@ -92,5 +94,5 @@ export default function ProductsList() {
               </ConfirmModal>
             </React.Fragment>
         ); 
-    }
+    
 }

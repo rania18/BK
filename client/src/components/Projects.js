@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ListProjects } from '../actions/projectActions';
+import { getProjects } from '../actions/projectActions';
 import Breadcrumbs from './modules/Breadcrumbs';
 import LoadingBox from './modules/LoadingBox';
 
@@ -11,7 +11,7 @@ export default function Projects() {
     const { loading, error, projects } = projectList;
 
     useEffect( () => {
-        dispatch(ListProjects())
+        dispatch(getProjects())
     }, [dispatch]);
     
     if (loading) {

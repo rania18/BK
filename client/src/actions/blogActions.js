@@ -1,38 +1,32 @@
-import axios from "axios";
-import { BLOG_DETAILS_FAIL, BLOG_DETAILS_REQUEST, BLOG_DETAILS_SUCCESS, BLOG_LIST_FAIL, BLOG_LIST_REQUEST, BLOG_LIST_SUCCESS } from "../constants/blogConstants"
+import * as api from '../api/index.js';
 
-export const ListBlog = () => async (dispatch) => {
-    dispatch({
-        type: BLOG_LIST_REQUEST
-    });
+import { 
+    LIST_BLOGS,
+    ONE_BLOG,
+    ONE_BLOG_LOADING,
+    ONE_BLOG_END_LOADING,
+    END_LOADING_BLOG,
+    START_LOADING_BLOG,
+} from '../constants/actionTypes';
+
+export const getBlog = (id) => async (dispatch) => {
     try {
-        const { data } = await axios.get('/api/blogs');
-        dispatch({
-            type: BLOG_LIST_SUCCESS, payload: data 
-        });
-    } catch(error) {
-        dispatch({
-            type: BLOG_LIST_FAIL, payload: error.message 
-        });
+      dispatch({ type: ONE_BLOG_LOADING });
+      const { data: { data } } = await api.fetchBlog(id);
+      dispatch({ type: ONE_BLOG, payload: { data } });
+      dispatch({ type: ONE_BLOG_END_LOADING });
+    } catch (error) {
+      console.log(error);
     }
 };
 
-export const detailsBlog = (blogId) => async(dispatch) => {
-    dispatch({
-        type: BLOG_DETAILS_REQUEST, payload: blogId
-    });
+export const getBlogs = () => async (dispatch) => {
     try {
-        const { data } = await axios.get(`/api/blogs/${blogId}`);
-        dispatch({
-            type: BLOG_DETAILS_SUCCESS, payload: data
-        });
+      dispatch({ type: START_LOADING_BLOG });
+      const  { data }  = await api.fetchBlogs();
+      dispatch({ type: LIST_BLOGS, payload:  data });
+      dispatch({ type: END_LOADING_BLOG });
     } catch (error) {
-        dispatch({
-            type: BLOG_DETAILS_FAIL, 
-            payload: 
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
-        });
+      console.log(error);
     }
-}
+  };

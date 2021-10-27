@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
 
-import auth from './auth';
-import users from './users';
-import product from './products';
-import project from './project';
-import blog from './blog';
-import category from './category';
-import slider from './sliders';
-import instagram from './instagram';
-import shop from './shop';
+import authReducers from './auth';
+import userReducers from './users';
+import productReducers from './products';
+import projectReducers from './project';
+import blogReducers from './blog';
+import categoryReducers from './category';
+import sliderReducers from './sliders';
+import instagramReducers from './instagram';
+import shopreducers from './shop';
 
 
-export const reducers = combineReducers({ auth, users, product, project, blog, category, slider, instagram, shop  });
+export const reducers = combineReducers({ auth: authReducers, users: userReducers, products: productReducers, projects: projectReducers, blog: blogReducers, categories: categoryReducers, slider: sliderReducers, instagram: instagramReducers, shop: shopreducers  });

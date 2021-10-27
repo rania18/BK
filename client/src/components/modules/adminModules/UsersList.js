@@ -14,72 +14,69 @@ import { ListUsers, DeleteUser } from '../../../actions/userActions';
 import LoadingModule from '../LoadingModule';
 import ErrorPage from '../ErrorPage';
 import ConfirmModal from './ConfirmModal'
+import UserModal from './UserModal';
 
 
 export default function UsersList() {
 
     const dispatch = useDispatch();
-    const userList = useSelector( state => state.userList);
-    const {UsersIsLoading, error, users} = userList;
+    const {UsersIsLoading, users} = useSelector( state => state.users);
     const [show, setShow] = useState(false);
     const [userId, setId] = useState('');
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
     const deleteAction = () => {
        dispatch(DeleteUser(userId));
        setShow(false);
-       window.location.reload();
     }
 
     useEffect(() => {
         dispatch(ListUsers());
     }, [dispatch]);
     
-    if (UsersIsLoading) {
-        return ( <LoadingModule></LoadingModule> );
-    
-    } else if (error) {
-
-        return ( <ErrorPage msg={error}></ErrorPage> );
-
-    } else {
+    if (UsersIsLoading) {  return ( <LoadingModule></LoadingModule> ); } 
         return (
             <React.Fragment>
               <div className='table-header-container'>
                 <Title>Users</Title>
-                <button><Link to='/admin/users/new'>
-                    <AddCircleIcon color='primary' style={{ fontSize: 50 }} /></Link>
+                <button>
+                  <AddCircleIcon color='primary' style={{ fontSize: 50 }} onClick={() => {setSelectedUser(null); setShowModal(true)}} />
                 </button>
               </div>
-             
-              <Table size="small">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Role</TableCell>
-                    <TableCell align="right">Actions</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {users?.map((user) => (
-                      <TableRow key={user?._id}>
-                          <TableCell>{user?.name}</TableCell>
-                          <TableCell>{user?.email}</TableCell>
-                          <TableCell>{user?.isAdmin}</TableCell>
-                          <TableCell align="right" className='admin-actions'>
-                              <Link to={`/admin/users/${user._id}`}><EditIcon /></Link>
-                              <button 
-                              onClick={ () => {
-                                setShow(true)
-                                setId(user._id)
-                              }} 
-                              className='delete-btn' 
-                              ><DeleteForeverIcon /></button>
-                          </TableCell>
-                      </TableRow>
-                  ))}
-                  </TableBody>
-              </Table>
+             <div className='table'>
+                <Table size="small">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Name</TableCell>
+                      <TableCell>Email</TableCell>
+                      <TableCell>Role</TableCell>
+                      <TableCell align="right">Actions</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {users?.map((user) => (
+                        <TableRow key={user?._id}>
+                            <TableCell>{user?.name}</TableCell>
+                            <TableCell>{user?.email}</TableCell>
+                            <TableCell>{user?.isAdmin ? "Admin" : "Not admin"}</TableCell>
+                            <TableCell align="right" className='admin-actions'>
+                            <EditIcon onClick={() => {setSelectedUser(user); setShowModal(true)}} style={{color:'#5bb56e'}} />
+
+                                <button 
+                                onClick={ () => {
+                                  setShow(true)
+                                  setId(user._id)
+                                }} 
+                                className='delete-btn' 
+                                ><DeleteForeverIcon style={{color:'red'}} /></button>
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                    </TableBody>
+                </Table>
+              </div>
+              <UserModal users={users} user={selectedUser} showModal={showModal} closeModal={() => setShowModal(false)} />
               <ConfirmModal 
                 show={show} 
                 qst="Delete user"
@@ -89,5 +86,5 @@ export default function UsersList() {
               </ConfirmModal>
             </React.Fragment>
         ); 
-    }
+    
 }

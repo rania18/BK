@@ -3,31 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Breadcrumbs from './modules/Breadcrumbs'
 import LoadingBox from './modules/LoadingBox';
-import ErrorPage from './modules/ErrorPage';
 import ProductBlock from './modules/ProductBlock';
-import { DetailsShop } from '../actions/shopActions';
+import { getShops } from '../actions/shopActions';
 import Carousel from 'react-elastic-carousel';
 
 export default function Shop() {
 
     const dispatch = useDispatch();
-    const shopDetails = useSelector((state) => state.shopDetails);
-    const { loading, error, details } = shopDetails;
+    const { ShopsIsLoading, details } = useSelector( state => state.details);
 
     useEffect(() => {
-        dispatch(DetailsShop())
+        dispatch(getShops())
     }, [dispatch])
     
-    if (loading) {
-
-        return ( <LoadingBox></LoadingBox> );
-    
-    } else if (error) {
-
-        return ( <ErrorPage variant="danger">{error}</ErrorPage> );
-
-    } else {
-
+    if (ShopsIsLoading) { return ( <LoadingBox></LoadingBox> ); } 
         const mainCategories = details.categories.filter(main => main.parentId === '0');
         const products = details.products;
 
@@ -68,5 +57,5 @@ export default function Shop() {
                 }
             </div>
         )
-    }
+    
 }

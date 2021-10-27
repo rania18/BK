@@ -8,7 +8,7 @@ router.get('/', getAllProducts);
 router.get('/seed', getSeedProducts);
 router.get('/:id', getProduct);
 router.post('/add', createProduct);
-router.post('/edit/:id', updateProduct);
+router.patch('/edit/:id', updateProduct);
 router.delete('/:id', deleteProdduct);
 
 export default router;

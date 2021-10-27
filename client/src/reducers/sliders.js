@@ -1,15 +1,16 @@
-/* eslint-disable import/no-anonymous-default-export */
-import { SLIDER_LIST_FAIL, SLIDER_LIST_REQUEST, SLIDER_LIST_SUCCESS } from "../constants/sliderConstants";
 
-export default (state = { loading: true, sliders: {} }, action) =>{
-    switch(action.type){
-        case SLIDER_LIST_REQUEST:
-            return {loading: true};
-        case SLIDER_LIST_SUCCESS:
-            return {loading: false, sliders: action.payload};
-        case SLIDER_LIST_FAIL:
-            return {loading: false, error: action.payload};
+import { END_LOADING_SLIDER, LIST_SLIDERS, START_LOADING_SLIDER } from '../constants/actionTypes'
+const sliderReducers = (state = { SlidersIsLoading: true, sliders: [] }, action) => {
+    switch (action.type) {
+        case START_LOADING_SLIDER:
+            return { ...state, SlidersIsLoading: true };
+        case END_LOADING_SLIDER:
+            return { ...state, SlidersIsLoading: false };
+        case LIST_SLIDERS:
+            return { ...state, sliders: action.payload };
         default:
-            return state;
+        return state;
     }
-}
+  };
+
+  export default sliderReducers;

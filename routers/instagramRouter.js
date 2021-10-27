@@ -1,29 +1,11 @@
 import express from 'express';
-import expressAsyncHandler from 'express-async-handler';
-import Instagram from '../models/instagramModel.js';
-import data from '../data.js';
 
-const instagramRouter = express.Router();
+import { getAllInstagram, getSeedInstagram, getInstagram } from '../controller/instagrams.js';
 
-instagramRouter.get('/', expressAsyncHandler(async (req, res) => {
-    const instagrams = await Instagram.find({});
-    res.send(instagrams);
-}))
+const router = express.Router();
 
-instagramRouter.get('/seed', expressAsyncHandler(async (req, res) => {
-    // Remove All Instagrams
-    // await Instagram.remove({});
-    const createdInstagrams = await Instagram.insertMany(data.instagram);
-    res.send({ createdInstagrams });
-}))
+router.get('/', getAllInstagram);
+router.get('/seed', getSeedInstagram);
+router.get('/:id', getInstagram);
 
-instagramRouter.get('/:id', expressAsyncHandler(async (req, res) => {
-    const instagram = await Instagram.findById(req.params.id);
-    if (instagram) {
-        res.send(instagram);
-    } else {
-        res.status(404).send({message: 'Instagram Link Not Found'});
-    }
-}))
-
-export default instagramRouter;
+export default router;

@@ -13,13 +13,12 @@ const productSchema = new mongoose.Schema({
     popular: Boolean,
     related: [String],
     minQtn: Number,
-    details: {
-        width: String,
-        height: String,
-        matter: String,
-        delay: String,
-    }
-    
+    countInStock: Number,
+    minStock: Number,
+    width: String,
+    height: String,
+    matter: String,
+    delay: String,
 }, {
     timestamps: true,
 });

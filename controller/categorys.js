@@ -6,15 +6,15 @@ import data from '../data.js';
 const router = express.Router();
 
 // GET ALL CATEGORY
-export const getAllCategorys = async (req, res) => {
+export const getAllCategories = async (req, res) => {
     const categories = await Category.find({});
     res.send(categories);
 };
 
 // SEED CATEGORIES FROM DATA.JS
-export const getSeedCategorys = async (req, res) => {
+export const getSeedCategories = async (req, res) => {
     // Remove All Categories
-    await Category.delete({});
+    await Category.deleteMany({});
     // Insert Many from data.js
     const createdCategories = await Category.insertMany(data.categories);
     res.send({ createdCategories });
@@ -37,12 +37,11 @@ export const getCategory = async (req, res) => {
 export const creatCategory = async (req, res) => {
     const newCategory = req.body
     const category = new Category({ ...newCategory });
-    // SAVE CATEGORY
     try {
-        await category.save();
-        res.send('Category Added');
+        const result = await category.save();
+        res.status(201).json(result);
     } catch (error) {
-        res.status(403).send('Category Not Found');
+        res.status(501).send(error);
     }
 };
 
@@ -56,7 +55,7 @@ export const updatCategory = async (req, res) => {
         await Category.findByIdAndUpdate(id, updatedCategory, { new: true });
         res.json(updatedCategory);
     } catch (error) {
-        res.status(403).send('Category Not Update');
+        res.status(403).json({ message: error.message });
     }
 };
 

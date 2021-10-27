@@ -17,9 +17,9 @@ import MenuListItems from './modules/adminModules/MenuListItems.js';
 import HomeTab from './modules/adminModules/HomeTab.js';
 import CategoriesList from './modules/adminModules/CategoriesList.js';
 import ProductsList from './modules/adminModules/ProductsList.js';
-import CategoryAdd from './modules/adminModules/CategoryAdd.js';
-import CategoryEdit from './modules/adminModules/CategoryEdit.js';
-import ProductAdd from './modules/adminModules/ProductAdd.js';
+/* import CategoryAdd from './modules/adminModules/CategoryModal.js';
+import CategoryEdit from './modules/adminModules/CategoryEdit.js'; */
+import ProductAdd from './modules/adminModules/ProductModal.js';
 import UsersList from './modules/adminModules/UsersList.js';
 
 function Copyright() {
@@ -108,8 +108,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
   },
   container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
+    padding: "20px",
     position: 'relative',
     minHeight: '100vh'
   },
@@ -174,7 +173,7 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
+        <div className={classes.container}>
 
             { /* TAB CONTENT */ }
             <Switch>
@@ -184,18 +183,18 @@ export default function Dashboard() {
                 <Route path="/admin/categories" exact={true} render={ (props) =>
                     <CategoriesList  />
                 }/>
-                <Route path="/admin/categories/new" exact={true} render={ (props) =>
+                {/* <Route path="/admin/categories/new" exact={true} render={ (props) =>
                     <CategoryAdd  />
                 }/>
                 <Route path="/admin/categories/:id" exact={true} render={ (props) =>
                     <CategoryEdit  />
-                }/>
+                }/> */}
                 <Route path="/admin/products" exact={true} render={ (props) =>
                     <ProductsList  />
                 }/>
-                <Route path="/admin/products/new" exact={true} render={ (props) =>
+                {/* <Route path="/admin/products/new" exact={true} render={ (props) =>
                     <ProductAdd  />
-                }/>
+                }/> */}
                  <Route path="/admin/users" exact={true} render={ (props) =>
                     <UsersList  />
                 }/>
@@ -204,7 +203,7 @@ export default function Dashboard() {
           <Box pt={4}>
             <Copyright />
           </Box>
-        </Container>
+        </div>
       </main>
     </div>
   );

@@ -1,18 +1,19 @@
-import axios from 'axios';
-import { SHOP_DETAILS_FAIL, SHOP_DETAILS_REQUEST, SHOP_DETAILS_SUCCESS } from '../constants/shopConstants';
+import * as api from '../api/index.js';
 
-export const DetailsShop = () => async (dispatch) => {
-    dispatch({
-        type: SHOP_DETAILS_REQUEST
-    });
+import { 
+    LIST_SHOPS,
+    END_LOADING_SHOP,
+    START_LOADING_SHOP,
+} from '../constants/actionTypes';
+
+
+export const getShops = () => async (dispatch) => {
     try {
-        const { data } = await axios.get('/api/shop');
-        dispatch({
-            type: SHOP_DETAILS_SUCCESS, payload: data 
-        });
-    } catch(error) {
-        dispatch({
-            type: SHOP_DETAILS_FAIL, payload: error.message 
-        });
+      dispatch({ type: START_LOADING_SHOP });
+      const  { data }  = await api.fetchShops();
+      dispatch({ type: LIST_SHOPS, payload:  data });
+      dispatch({ type: END_LOADING_SHOP });
+    } catch (error) {
+      console.log(error);
     }
-};
+  };

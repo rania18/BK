@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ListBlog } from '../actions/blogActions';
+import { getBlogs } from '../actions/blogActions';
 import Breadcrumbs from './modules/Breadcrumbs';
 import ErrorPage from './modules/ErrorPage';
 import LoadingBox from './modules/LoadingBox';
@@ -12,7 +12,7 @@ export default function BlogPage() {
     const { loading, error, blog } = blogList;
 
     useEffect(() => {
-        dispatch(ListBlog())
+        dispatch(getBlogs())
     }, [dispatch]);
     
     if (loading) {

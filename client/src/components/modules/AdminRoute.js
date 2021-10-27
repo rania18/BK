@@ -1,17 +1,15 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
 export default function AdminRoute({ children, ...rest }) {
 
-    const userSignin = useSelector(state => state.userSignin);
-    const { userInfo } = userSignin;
-
+    const user = JSON.parse(localStorage.getItem('profile'))
+    
     return (
         <Route 
             {...rest} 
             render={ (props) => 
-                userInfo && userInfo.isAdmin ? (
+                user?.result?.isAdmin ? (
                     children
                 ) : (
                     <Redirect to="/signin" />

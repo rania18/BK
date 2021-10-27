@@ -1,18 +1,19 @@
-import axios from "axios";
-import { SLIDER_LIST_FAIL, SLIDER_LIST_REQUEST, SLIDER_LIST_SUCCESS } from "../constants/sliderConstants"
+import * as api from '../api/index.js';
 
-export const ListSlider = () => async (dispatch) => {
-    dispatch({
-        type: SLIDER_LIST_REQUEST
-    });
+import { 
+    LIST_SLIDERS,
+    END_LOADING_SLIDER,
+    START_LOADING_SLIDER
+} from '../constants/actionTypes';
+
+
+export const getSliders = () => async (dispatch) => {
     try {
-        const { data } = await axios.get('/api/sliders');
-        dispatch({
-            type: SLIDER_LIST_SUCCESS, payload: data 
-        });
-    } catch(error) {
-        dispatch({
-            type: SLIDER_LIST_FAIL, payload: error.message 
-        });
+      dispatch({ type: START_LOADING_SLIDER });
+      const  { data }  = await api.fetchSliders();
+      dispatch({ type: LIST_SLIDERS, payload:  data });
+      dispatch({ type: END_LOADING_SLIDER });
+    } catch (error) {
+      console.log(error);
     }
-};
+  };

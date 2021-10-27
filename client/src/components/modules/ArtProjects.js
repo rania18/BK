@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { ListProjects } from '../../actions/projectActions';
+import { getProjects } from '../../actions/projectActions';
 import LoadingBox from './LoadingBox';
-import MessageBox from './MessageBox';
 import ProjectModal from './ProjectModal';
 
 function ArtProjects () {
 
     const dispatch = useDispatch();
-    const projectList = useSelector( state => state.projectList);
-    const {loading, error, projects} = projectList;
+    const {ProjectsIsLoading, projects} = useSelector( state => state.projects);
     const [show, setShow] = useState(false);
     const [project, setProject] = useState(null);
 
@@ -26,18 +24,10 @@ function ArtProjects () {
     }
 
     useEffect(() => {
-        dispatch(ListProjects());
+        dispatch(getProjects());
     }, [dispatch]);
     
-    if (loading) {
-
-        return ( <LoadingBox></LoadingBox> );
-    
-    } else if (error) {
-
-        return ( <MessageBox variant="danger">{error}</MessageBox> );
-
-    } else {
+    if (ProjectsIsLoading) { return ( <LoadingBox></LoadingBox> ); }
         return <div className="projects-container">
             <div className="art-projects">
                 {projects.map(item => (
@@ -54,7 +44,6 @@ function ArtProjects () {
             <button className="view-all"><Link to="/projects">View All Projects</Link></button>
             <ProjectModal show={show} project={project} onClose={closeModal} />
         </div>
-    }
 }
 
 export default ArtProjects;

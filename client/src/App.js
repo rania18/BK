@@ -1,7 +1,6 @@
 import React from 'react';
 import './assets/app.css';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import Home from './components/Home.js';

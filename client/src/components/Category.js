@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Breadcrumbs from './modules/Breadcrumbs'
 import LoadingBox from './modules/LoadingBox';
 import ErrorPage from './modules/ErrorPage';
-import { DetailsCategory } from '../actions/categoryActions';
+import { getCategories } from '../actions/categoryActions';
 import { useParams } from 'react-router';
 import ProductBlock from './modules/ProductBlock';
 import Carousel from 'react-elastic-carousel';
@@ -18,7 +18,7 @@ export default function Category() {
     const { loading, error, details } = categoryDetails;
 
     useEffect(() => {
-        dispatch(DetailsCategory(categoryId))
+        dispatch(getCategories(categoryId))
     }, [dispatch, categoryId])
     
     if (loading) {

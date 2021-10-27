@@ -28,50 +28,43 @@ export default {
     categories: [
         {
             title: "Table",
-            image: "/images/categories/table.png",
-            headerImage: "/images/projects/project-2.jpg",
+            image: "",
             parentId: "0",
         },
         {
             title: "Cabinet",
-            image: "/images/categories/cabinet.png",
-            headerImage: "/images/projects/project-4.jpg",
+            image: "",
             parentId: "0",
         },
         {
             title: "Chair",
-            image: "/images/categories/chair.png",
-            headerImage: "/images/projects/project-1.jpg",
+            image: "",
             parentId: "0",
         },
         {
             title: "Arm Chair",
-            image: "/images/categories/armchair.png",
-            headerImage: "/images/projects/project-4.jpg",
+            image: "",
             parentId: "0",
         },
         {
             title: "Bed",
-            image: "/images/categories/bed.png",
-            headerImage: "/images/projects/project-1.jpg",
+            image: "",
             parentId: "0",
         },
         {
             title: "Sofa",
-            image: "/images/categories/sofa.png",
-            headerImage: "/images/projects/project-2.jpg",
+            image: "",
             parentId: "0",
         },
         {
             title: "Wardrobe",
-            image: "/images/categories/wardrobe.png",
-            headerImage: "/images/projects/project-3.jpg",
+            image: "",
             parentId: "0",
         },
     ],
 
     products: [
-        {
+        /* {
             name: "Laura",
             image: "/images/products/product-1.png",
             price: 200,
@@ -166,7 +159,7 @@ export default {
             height: '160 CM',
             matter: 'Boi',
             delay: '5 Jours',
-        },
+        }, */
     ],
 
     sliders: [

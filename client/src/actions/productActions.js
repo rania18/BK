@@ -22,19 +22,19 @@ export const getProduct = (id) => async (dispatch) => {
       console.log(error);
     }
 };
-  
+
 export const getProducts = () => async (dispatch) => {
     try {
       dispatch({ type: START_LOADING_PRODUCT });
-      const { data: { data } } = await api.fetchProducts();
-      dispatch({ type: LIST_PRODUCTS, payload: { data } });
+      const  { data }  = await api.fetchProducts();
+      dispatch({ type: LIST_PRODUCTS, payload:  data });
       dispatch({ type: END_LOADING_PRODUCT });
     } catch (error) {
       console.log(error);
     }
   };
 
-export const createProduct = (product, history) => async (dispatch) => {
+export const createProduct = (product) => async (dispatch) => {
     try {
       dispatch({ type: START_LOADING_PRODUCT });
       const { data } = await api.createProduct(product);

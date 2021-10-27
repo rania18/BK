@@ -1,10 +1,8 @@
 import express from 'express';
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-
 import UserModal from "../models/userModel.js";
 const secret = 'test';
-
 const router = express.Router();
 
 export const getSeedUsers = async (req, res) => {
@@ -23,18 +21,12 @@ export const getSeedUsers = async (req, res) => {
 
 export const signin = async (req, res) => {
     const { email, password } = req.body;
-  
     try {
       const oldUser = await UserModal.findOne({ email });
-  
       if (!oldUser) return res.status(404).json({ message: "User doesn't exist" });
-  
       const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
-  
       if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid credentials" });
-  
       const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, secret, { expiresIn: "24h" });
-  
       res.status(200).json({ result: oldUser, token });
     } catch (err) {
       res.status(500).json({ message: "Something went wrong" });
@@ -74,26 +66,34 @@ export const signin = async (req, res) => {
 export const listUsers = async (req, res) => {   
     try {
         const users = await UserModal.find()
-        res.json({ data: users});
+        res.send(users);
     } catch (error) {    
         res.status(404).json({ message: error.message });
+
     }
 }
 
 export const addUser = async (req, res) => {
-    const { name, email, password, isAdmin } = req.body;
-
-    try {
+  const { email, password, name, googleRequest } = req.body;
+  
+  try {
     const oldUser = await UserModal.findOne({ email });
 
     if (oldUser) {
+      if (googleRequest) {
+        return res.status(200).json({ message: "User already exists" });
+      } else {
         return res.status(400).json({ message: "User already exists" });
+      }
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
-    await UserModal.create({name, email, password: hashedPassword, isAdmin });
 
-    res.json({ message: "User Added successfully." });
+    const result = await UserModal.create({ email, password: hashedPassword, name });
+
+    const token = jwt.sign( { email: result.email, id: result._id }, secret, { expiresIn: "24h" } );
+
+    res.status(201).json({ result, token });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });
     

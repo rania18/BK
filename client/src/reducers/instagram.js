@@ -1,15 +1,23 @@
-/* eslint-disable import/no-anonymous-default-export */
-import { INSTAGRAM_LIST_FAIL, INSTAGRAM_LIST_REQUEST, INSTAGRAM_LIST_SUCCESS } from "../constants/instagramConstants";
+import { END_LOADING_INSTAGRAM, LIST_INSTAGRAMS, ONE_INSTAGRAM, ONE_INSTAGRAM_END_LOADING, ONE_INSTAGRAM_LOADING, START_LOADING_INSTAGRAM } from "../constants/actionTypes";
 
-export default (state = { loading: true, instagram: [] }, action) =>{
-    switch(action.type){
-        case INSTAGRAM_LIST_REQUEST:
-            return {loading: true};
-        case INSTAGRAM_LIST_SUCCESS:
-            return {loading: false, instagram: action.payload};
-        case INSTAGRAM_LIST_FAIL:
-            return {loading: false, error: action.payload};
+
+const instagramReducers = (state = { OneInstagramIsLoading: true, InstagramsIsLoading: true, instagrams: [], instagram: {} }, action) => {
+    switch (action.type) {
+        case START_LOADING_INSTAGRAM:
+            return { ...state, InstagramsIsLoading: true };
+        case END_LOADING_INSTAGRAM:
+            return { ...state, InstagramsIsLoading: false };
+        case ONE_INSTAGRAM_LOADING:
+            return { ...state, OneInstagramIsLoading: true };
+        case ONE_INSTAGRAM_END_LOADING:
+            return { ...state, OneInstagramIsLoading: false };
+        case LIST_INSTAGRAMS:
+            return { ...state, instagrams: action.payload };
+        case ONE_INSTAGRAM:
+            return { ...state, instagram: action.payload.data };
         default:
-            return state;
+        return state;
     }
-}
+  };
+
+  export default instagramReducers;

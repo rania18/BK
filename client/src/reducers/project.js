@@ -1,28 +1,28 @@
-/* eslint-disable import/no-anonymous-default-export */
-import { PROJECT_DETAILS_FAIL, PROJECT_DETAILS_REQUEST, PROJECT_DETAILS_SUCCESS, PROJECT_LIST_FAIL, PROJECT_LIST_REQUEST, PROJECT_LIST_SUCCESS } from "../constants/projectConstants";
+import { LIST_PROJECTS, ONE_PROJECT, CREATE_PROJECT, UPDATE_PROJECT, DELETE_PROJECT, END_LOADING_PROJECT, START_LOADING_PROJECT, ONE_PROJECT_LOADING, ONE_PROJECT_END_LOADING } from "../constants/actionTypes";
 
-export default (state = { loading: true, projects: [] }, action) =>{
-    switch(action.type){
-        case PROJECT_LIST_REQUEST:
-            return {loading: true};
-        case PROJECT_LIST_SUCCESS:
-            return {loading: false, projects: action.payload};
-        case PROJECT_LIST_FAIL:
-            return {loading: false, error: action.payload};
-        default:
-            return state;
+const projectReducers = (state = { OneProjectIsLoading: true, ProjectsIsLoading: true, projects: [], project: {} }, action) => {
+    switch (action.type) {
+        case START_LOADING_PROJECT:
+            return { ...state, ProjectsIsLoading: true };
+        case END_LOADING_PROJECT:
+            return { ...state, ProjectsIsLoading: false };
+        case ONE_PROJECT_LOADING:
+            return { ...state, OneProjectIsLoading: true };
+        case ONE_PROJECT_END_LOADING:
+            return { ...state, OneProjectIsLoading: false };
+        case LIST_PROJECTS:
+            return { ...state, projects: action.payload.data };
+        case ONE_PROJECT:
+         return { ...state, project: action.payload.data };
+        case CREATE_PROJECT:
+            return { ...state, projects: [...state.projects, action.payload.project] };
+        case UPDATE_PROJECT:
+            return { ...state, projects: state.projects.map((project) => (project._id === action.payload._id ? action.payload : project)) };
+        case DELETE_PROJECT:
+            return { ...state, projects: state.projects.filter((project) => project._id !== action.payload) };
+      default:
+        return state;
     }
-}
+  };
 
-export const projectDetailsReducer = (state = { loading: true, project: {} }, action) =>{
-    switch(action.type){
-        case PROJECT_DETAILS_REQUEST:
-            return {loading: true};
-        case PROJECT_DETAILS_SUCCESS:
-            return {loading: false, project: action.payload};
-        case PROJECT_DETAILS_FAIL:
-            return {loading: false, error: action.payload};
-        default:
-            return state;
-    }
-}
+  export default projectReducers;

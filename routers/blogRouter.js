@@ -1,29 +1,11 @@
 import express from 'express';
-import expressAsyncHandler from 'express-async-handler';
-import Blog from '../models/blogModel.js';
-import data from '../data.js';
 
-const blogRouter = express.Router();
 
-blogRouter.get('/', expressAsyncHandler(async (req, res) => {
-    const blogs = await Blog.find({});
-    res.send(blogs);
-}))
+import { getAllBlogs, getSeedBlog, getBlog } from '../controller/blogs.js'
+const router = express.Router();
 
-blogRouter.get('/seed', expressAsyncHandler(async (req, res) => {
-    // Remove All Blogs
-    await Blog.deleteMany({});
-    const createdBlogs = await Blog.insertMany(data.blog);
-    res.send({ createdBlogs });
-}))
+router.get('/', getAllBlogs); 
+router.get('/seed', getSeedBlog);
+router.get('/:id', getBlog);
 
-blogRouter.get('/:id', expressAsyncHandler(async (req, res) => {
-    const blog = await Blog.findById(req.params.id);
-    if (blog) {
-        res.send(blog);
-    } else {
-        res.status(404).send({message: 'Blog Not Found'});
-    }
-}))
-
-export default blogRouter;
+export default router;

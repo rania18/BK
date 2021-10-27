@@ -8,7 +8,6 @@ import decode from 'jwt-decode';
 
 export default function Header(props) {
 
-    const { userInfo } = props;
     const dispatch = useDispatch();
     const history = useHistory();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -28,10 +27,11 @@ export default function Header(props) {
         if (decodedToken?.exp * 1000 < new Date().getTime()) logout();
       }
       setUser(JSON.parse(localStorage.getItem('profile')));
+      // eslint-disable-next-line
     }, [location]);
 
     return (
-        <header id="header" className={userInfo && userInfo.isAdmin && 'hideElement'}>
+        <header id="header" className={user?.result?.isAdmin && 'hideElement'}>
             <div id="topbar" className="topbar"> 
               <nav className="topnav">
                 <ul>
@@ -51,7 +51,7 @@ export default function Header(props) {
                     </a></li>
   
                   {
-                  userInfo ? (
+                  user?.result?.isAdmin ? (
                       <div>
                         <li className="setting">
                           <Link to="/admin">

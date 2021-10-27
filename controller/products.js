@@ -7,7 +7,7 @@ const router = express.Router();
 
 // GET ALL PRODUCTS
 export const getAllProducts = async (req, res) => {
-    const products = await Product.find({});
+    const products = await Product.find({}).populate('category');
     res.send(products);
 };
 
@@ -33,17 +33,15 @@ export const getProduct = async (req, res) => {
 
 // Add Product
 export const createProduct = async (req, res) => {
-
     const newProduct = req.body
     const product = new Product({ ...newProduct });
     // SAVE PRODUCT
     try {
-        await product.save();
-        res.send('Product Added');
+        const result = await product.save();
+        res.status(201).json(result);
     } catch (error) {
-        res.status(403).send('Product Not Found');
+        res.status(501).send(error);
     }
-
 };
 
 // Update Product

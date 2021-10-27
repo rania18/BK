@@ -4,8 +4,8 @@ import { CREATE_USER, DELETE_USER, EDIT_PROFILE, END_LOADING_USER, LIST_USERS, P
 export const ListUsers = () => async (dispatch) => {
     try {
       dispatch({ type: START_LOADING_USER });
-      const { data: { data } } = await api.ListUsers();
-      dispatch({ type: LIST_USERS, payload: { data } });
+      const  { data }  = await api.ListUsers();
+      dispatch({ type: LIST_USERS, payload:  data  });
       dispatch({ type: END_LOADING_USER });
     } catch (error) {
       console.log(error);
@@ -25,9 +25,10 @@ export const ListUsers = () => async (dispatch) => {
 
   export const EditUser = (id, newUser) => async (dispatch) => {
     try {
+      dispatch({ type: START_LOADING_USER });
       const { data } = await api.EditUser(id, newUser);
-  
       dispatch({ type: UPDATE_USER, payload: data });
+      dispatch({ type: END_LOADING_USER });
     } catch (error) {
       console.log(error);
     }

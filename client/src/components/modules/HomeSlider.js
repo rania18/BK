@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import Slider from "react-animated-slider";
 import "react-animated-slider/build/horizontal.css";
@@ -6,23 +6,23 @@ import "./../../assets/slider-style.css";
 
 export default function HomeSlider() {
 
-    /* const dispatch = useDispatch();
-    const sliderList = useSelector( state => state.sliderList);
-    const {loading, error, sliders} = sliderList;
+    // const dispatch = useDispatch();
+    // const sliderList = useSelector( state => state.sliderList);
+    // const {loading, error, sliders} = sliderList;
 
-    useEffect(() => {
-        dispatch(ListSlider());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(ListSlider());
+    // }, [dispatch]);
     
-    if (loading) {
+    // if (loading) {
 
-        return ( <LoadingBox></LoadingBox> );
+    //     return ( <LoadingBox></LoadingBox> );
     
-    } else if (error) {
+    // } else if (error) {
 
-        return ( <MessageBox variant="danger">{error}</MessageBox> );
+    //     return ( <MessageBox variant="danger">{error}</MessageBox> );
 
-    } else { */
+    // } else { 
         return (
             <Slider className="slider-wrapper">
 
@@ -116,5 +116,5 @@ export default function HomeSlider() {
             
         </Slider>
         ) 
-    // }
+    //  }
 }

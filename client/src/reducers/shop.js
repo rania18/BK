@@ -1,15 +1,16 @@
-/* eslint-disable import/no-anonymous-default-export */
-import { SHOP_DETAILS_FAIL, SHOP_DETAILS_REQUEST, SHOP_DETAILS_SUCCESS } from "../constants/shopConstants";
+import { END_LOADING_SHOP, LIST_SHOPS, START_LOADING_SHOP } from "../constants/actionTypes";
 
-export default (state = { loading: true, details: {} }, action) => {
-    switch(action.type){
-        case SHOP_DETAILS_REQUEST:
-            return {loading: true};
-        case SHOP_DETAILS_SUCCESS:
-            return {loading: false, details: action.payload};
-        case SHOP_DETAILS_FAIL:
-            return {loading: false, error: action.payload};
+const shopreducers = (state = { ShopsIsLoading: true, shops: [] }, action) => {
+    switch (action.type) {
+        case START_LOADING_SHOP:
+            return { ...state, ShopsIsLoading: true };
+        case END_LOADING_SHOP:
+            return { ...state, ShopsIsLoading: false };
+        case LIST_SHOPS:
+            return { ...state, shops: action.payload };
         default:
-            return state;
+        return state;
     }
-}
+  };
+
+  export default shopreducers;
