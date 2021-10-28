@@ -10,7 +10,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import MenuListItems from './modules/adminModules/MenuListItems.js';
@@ -19,7 +18,6 @@ import CategoriesList from './modules/adminModules/CategoriesList.js';
 import ProductsList from './modules/adminModules/ProductsList.js';
 /* import CategoryAdd from './modules/adminModules/CategoryModal.js';
 import CategoryEdit from './modules/adminModules/CategoryEdit.js'; */
-import ProductAdd from './modules/adminModules/ProductModal.js';
 import UsersList from './modules/adminModules/UsersList.js';
 
 function Copyright() {

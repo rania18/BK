@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { ListBlog } from '../../actions/blogActions';
+import { getBlogs } from '../../actions/blogActions';
 import LoadingBox from './LoadingBox';
-import MessageBox from './MessageBox';
 import BlogModal from './BlogModal';
 
 function Blog (props) {
     const dispatch = useDispatch();
-    const blogList = useSelector( state => state.blogList);
-    const {loading, error, blog} = blogList;
+    const { BlogsIsLoading, blogs } = useSelector( state => state.blog);
 
     const [item, setItem] = useState(null);
     const [show, setShow] = useState(false);
@@ -27,17 +25,13 @@ function Blog (props) {
 
 
     useEffect(() => {
-        dispatch(ListBlog());
+        dispatch(getBlogs());
     }, [dispatch]);
     
-    if (loading) {
+    if (BlogsIsLoading) {
 
         return ( <LoadingBox></LoadingBox> );
     
-    } else if (error) {
-
-        return ( <MessageBox variant="danger">{error}</MessageBox> );
-
     } else {
         return <div className="blog-block">
             <h2>Blog</h2>
@@ -45,12 +39,12 @@ function Blog (props) {
 
             <div className="blog-container">
                 {
-                blog.map(item =>
+                blogs.map(item =>
                         <div className="blog-item" key={item._id}>
-                            <img src={item.image} alt="News" />
+                            <img src={item?.image} alt="News" />
                             <div className="blog-infos">
-                                <div className="date">{item.date}</div>
-                                <h3> {item.title} </h3>
+                                <div className="date">{item?.date}</div>
+                                <h3> {item?.title} </h3>
                             </div>
                             <button onClick={e => openModal(e, item)} className="view-all"><Link to="#">Read more</Link></button>   
                         </div>

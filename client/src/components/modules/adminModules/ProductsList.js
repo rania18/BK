@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -15,7 +14,6 @@ import LoadingModule from '../LoadingModule';
 import ConfirmModal from './ConfirmModal'
 import ProductModal from './ProductModal'
 import { getCategories } from '../../../actions/categoryActions';
-import { Container } from '@material-ui/core';
 
 export default function ProductsList() {
 
@@ -63,11 +61,11 @@ export default function ProductsList() {
                   <TableBody>
                     {products?.map((row) => (
                         <TableRow key={row._id}>
-                            <TableCell><img src={row.image} alt='Product' className="product-img-table" /></TableCell>
-                            <TableCell>{row.name}</TableCell>
-                            <TableCell>{row.category.title}</TableCell>
-                            <TableCell>{row.price}</TableCell>
-                            <TableCell>{row.availability}</TableCell>
+                            <TableCell><img src={row?.image} alt='Product' className="product-img-table" /></TableCell>
+                            <TableCell>{row?.name}</TableCell>
+                            <TableCell>{row.category?.title}</TableCell>
+                            <TableCell>{row?.price}</TableCell>
+                            <TableCell>{row?.availability}</TableCell>
                             <TableCell align="right" className='admin-actions'>
                                 <EditIcon onClick={() => {setSelectedProduct(row); setShowModal(true)}} style={{color:'#5bb56e'}} />
                                 <button 

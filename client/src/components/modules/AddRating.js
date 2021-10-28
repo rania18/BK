@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
 export default function AddRating(props) {
-    const { product } = props;
+    const { products } = props;
     const [ratingValue, setRatingValue] = useState(0);
-    console.log(product._id);
+    console.log(products?._id);
 
     return (
         <div className="add-rating">

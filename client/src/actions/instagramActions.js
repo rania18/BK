@@ -23,7 +23,7 @@ export const getInstagram = (id) => async (dispatch) => {
 export const getInstagrams = () => async (dispatch) => {
     try {
       dispatch({ type: START_LOADING_INSTAGRAM });
-      const  { data }  = await api.fetchInstagrams();
+      const  { data }  = await api.fetchInsatgrams();
       dispatch({ type: LIST_INSTAGRAMS, payload:  data });
       dispatch({ type: END_LOADING_INSTAGRAM });
     } catch (error) {

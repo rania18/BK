@@ -20,7 +20,7 @@ export const getProfile = (id) => API.get(`/api/users/profile/${id}`);
 export const editProfile = (id, formData) => API.patch(`/api/users/profile/${id}`, formData);
 
 //products
-export const fetchProducts = () => API.get(`/api/products`);
+export const fetchProducts = () => API.get(`/api/products/getProducts`);
 export const fetchProduct = (id) => API.get(`/api/products/${id}`);
 export const createProduct = (newProduct) => API.post('/api/products/add', newProduct);
 export const updateProduct = (id, updatedProduct) => API.patch(`/api/products/edit/${id}`, updatedProduct);
@@ -41,15 +41,15 @@ export const updateProject = (id, updatedProject) => API.patch(`/api/projects/ed
 export const deleteProject = (id) => API.delete(`/api/projects/${id}`);
 
 //blog
-export const fetchBlogs = () => API.get(`/api/blogs`);
+export const fetchBlogs = () => API.get('/api/blogs');
 export const fetchBlog = (id) => API.get(`/api/blogs/${id}`);
 
 //instagram
-export const fetchInsatgrams = () => API.get(`/api/instagrams`);
+export const fetchInsatgrams = () => API.get('/api/instagrams');
 export const fetchInstagram = (id) => API.get(`/api/instagrams/${id}`);
 
 //shop
 export const fetchShops = () => API.get(`/api/shop`);
 
 //slider
-export const fetchSliders = () => API.get(`/api/sliders`);
+export const fetchSliders = () => API.get('/api/sliders');

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function ModalCommande(props) {
-    const { product, qty } = props;
+    const { products, qty } = props;
 
     if (!props.show) {
         return null;
@@ -11,7 +11,7 @@ export default function ModalCommande(props) {
                 <div className="modal-box">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <img src={product.image} alt={product.name} />
+                            <img src={products.image} alt={products.name} />
                             <button id="close-modal" onClick={props.onClose} >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -23,7 +23,7 @@ export default function ModalCommande(props) {
                             <form>
                                 <div className="form-group">
                                     <label>Product Name</label>
-                                    <input type="text" value={product.name} readOnly />
+                                    <input type="text" value={products.name} readOnly />
                                 </div>
                                 <div className="form-group">
                                     <label>Quantity</label>

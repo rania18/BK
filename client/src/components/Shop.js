@@ -10,7 +10,7 @@ import Carousel from 'react-elastic-carousel';
 export default function Shop() {
 
     const dispatch = useDispatch();
-    const { ShopsIsLoading, details } = useSelector( state => state.details);
+    const { ShopsIsLoading, details } = useSelector( state => state.shop);
 
     useEffect(() => {
         dispatch(getShops())

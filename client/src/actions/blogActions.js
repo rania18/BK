@@ -24,7 +24,7 @@ export const getBlogs = () => async (dispatch) => {
     try {
       dispatch({ type: START_LOADING_BLOG });
       const  { data }  = await api.fetchBlogs();
-      dispatch({ type: LIST_BLOGS, payload:  data });
+      dispatch({ type: LIST_BLOGS, payload: data });
       dispatch({ type: END_LOADING_BLOG });
     } catch (error) {
       console.log(error);

@@ -2,23 +2,19 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBlogs } from '../actions/blogActions';
 import Breadcrumbs from './modules/Breadcrumbs';
-import ErrorPage from './modules/ErrorPage';
 import LoadingBox from './modules/LoadingBox';
 
 export default function BlogPage() {
 
     const dispatch = useDispatch();
-    const blogList = useSelector((state) => state.blogList)
-    const { loading, error, blog } = blogList;
+    const { BlogsIsLoading, blogs } = useSelector((state) => state.blog)
 
     useEffect(() => {
         dispatch(getBlogs())
     }, [dispatch]);
     
-    if (loading) {
+    if (BlogsIsLoading) {
         return (<LoadingBox></LoadingBox>)
-    } else if (error) {
-        return (<ErrorPage msg={error} />)
     } else {
 
         const bdcrumbs = {
@@ -36,13 +32,13 @@ export default function BlogPage() {
                 </div>
                 <div className="news-container">
                     {
-                        blog.map(item =>
+                        blogs?.map(item =>
                             <div className="news-item" >
                                 <div className="img-container">
-                                    <img src={item.image} alt={item.title} />
-                                    <strong>{item.date}</strong>
+                                    <img src={item?.image} alt={item?.title} />
+                                    <strong>{item?.date}</strong>
                                 </div>
-                                <h3>{item.news}</h3>
+                                <h3>{item?.news}</h3>
                             </div>
                         )
                     }

@@ -7,17 +7,14 @@ import LoadingBox from './modules/LoadingBox';
 export default function Projects() {
 
     const dispatch = useDispatch();
-    const projectList = useSelector((state) => state.projectList)
-    const { loading, error, projects } = projectList;
+    const { ProjectsIsLoading,  projects } = useSelector((state) => state.projects)
 
     useEffect( () => {
         dispatch(getProjects())
     }, [dispatch]);
     
-    if (loading) {
+    if (ProjectsIsLoading) {
         return <LoadingBox />
-    } else if (error) {
-
     } else {
 
         const bdcrumbs = {

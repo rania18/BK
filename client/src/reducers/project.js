@@ -1,6 +1,6 @@
 import { LIST_PROJECTS, ONE_PROJECT, CREATE_PROJECT, UPDATE_PROJECT, DELETE_PROJECT, END_LOADING_PROJECT, START_LOADING_PROJECT, ONE_PROJECT_LOADING, ONE_PROJECT_END_LOADING } from "../constants/actionTypes";
 
-const projectReducers = (state = { OneProjectIsLoading: true, ProjectsIsLoading: true, projects: [], project: {} }, action) => {
+const projectReducers = (state = { OneProjectIsLoading: false, ProjectsIsLoading: false, projects: [], project: {} }, action) => {
     switch (action.type) {
         case START_LOADING_PROJECT:
             return { ...state, ProjectsIsLoading: true };

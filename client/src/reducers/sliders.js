@@ -7,7 +7,7 @@ const sliderReducers = (state = { SlidersIsLoading: true, sliders: [] }, action)
         case END_LOADING_SLIDER:
             return { ...state, SlidersIsLoading: false };
         case LIST_SLIDERS:
-            return { ...state, sliders: action.payload };
+            return { ...state, sliders: action.payload, SlidersIsLoading: false };
         default:
         return state;
     }

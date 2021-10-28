@@ -4,7 +4,7 @@ import { getAllProducts, getSeedProducts, getProduct, createProduct, updateProdu
 
 const router = express.Router();
 
-router.get('/', getAllProducts);
+router.get('/getProducts', getAllProducts);
 router.get('/seed', getSeedProducts);
 router.get('/:id', getProduct);
 router.post('/add', createProduct);

@@ -80,7 +80,7 @@ export default function ScrollableTabsButtonForce(props) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-          <RelatedProducts related={product.related} />
+          <RelatedProducts related={product?.related} />
       </TabPanel>
       <TabPanel value={value} index={1}>
             <ProductInfos product={product} />

@@ -2,27 +2,21 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import LoadingBox from './LoadingBox';
-import MessageBox from './MessageBox';
-import { ListInstagram } from '../../actions/instagramActions';
+import { getInstagrams } from '../../actions/instagramActions';
 
 function Instagram () {
 
     const dispatch = useDispatch();
-    const instagramList = useSelector( state => state.instagramList);
-    const {loading, error, instagram} = instagramList;
+    const { InstagramsIsLoading,  instagrams } = useSelector( state => state.instagram);
 
     useEffect(() => {
-        dispatch(ListInstagram());
+        dispatch(getInstagrams());
     }, [dispatch]);
     
-    if (loading) {
+    if (InstagramsIsLoading) {
 
         return ( <LoadingBox></LoadingBox> );
     
-    } else if (error) {
-
-        return ( <MessageBox variant="danger">{error}</MessageBox> );
-
     } else {
         return (
             <div className="instagram-block">
@@ -31,9 +25,9 @@ function Instagram () {
 
                 <div className="instagram-images">
                     {
-                    instagram.map(item =>
-                            <div className="instagram-item" key={item._id}>
-                                <img src={item.image} alt="Instagram" />
+                    instagrams.map(item =>
+                            <div className="instagram-item" key={item?._id}>
+                                <img src={item?.image} alt="Instagram" />
                             </div>
                     )}
                 </div>

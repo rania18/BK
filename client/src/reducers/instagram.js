@@ -16,7 +16,7 @@ const instagramReducers = (state = { OneInstagramIsLoading: true, InstagramsIsLo
         case ONE_INSTAGRAM:
             return { ...state, instagram: action.payload.data };
         default:
-        return state;
+            return state;
     }
   };
 

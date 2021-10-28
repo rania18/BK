@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,7 +11,6 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { useDispatch, useSelector } from 'react-redux';
 import { ListUsers, DeleteUser } from '../../../actions/userActions';
 import LoadingModule from '../LoadingModule';
-import ErrorPage from '../ErrorPage';
 import ConfirmModal from './ConfirmModal'
 import UserModal from './UserModal';
 

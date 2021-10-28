@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Checkbox, FormControlLabel, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
 import MessageBox from '../MessageBox';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
@@ -82,17 +81,18 @@ export default function UserModal(props) {
                         <TextField required id="outlined-basic" label="User Name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                         <TextField required id="outlined-basic" label="User Email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
                         <TextField required id="outlined-basic" label="User Password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
-                        <FormControlLabel
-                            control={
-                            <Checkbox
-                                checked={formData.isAdmin}
-                                onChange={(e) => setFormData({ ...formData, isAdmin: !formData.isAdmin})}
-                                name="isAdmin"
-                                color="primary"
-                            />
-                            }
-                            label="Is Admin"
-                        />
+                        {user ? 
+                            <FormControlLabel
+                                control={
+                                <Checkbox
+                                    checked={formData.isAdmin}
+                                    onChange={(e) => setFormData({ ...formData, isAdmin: !formData.isAdmin})}
+                                    name="isAdmin"
+                                    color="primary"
+                                />
+                                }
+                                label="Is Admin"
+                            /> : ' '}
                     </form>
                     <Button variant="contained"
                             color="primary"

@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function ProductInfos(props) {
 
-    const { product } = props;
+    const { products } = props;
     return (
         <div className="product-info">
             <table>
@@ -15,19 +15,19 @@ export default function ProductInfos(props) {
                 <tbody>
                     <tr>
                         <td>Width</td>
-                        <td>{product.width}</td>
+                        <td>{products?.width}</td>
                     </tr>
                     <tr>
                         <td>Height</td>
-                        <td>{product.height}</td>
+                        <td>{products?.height}</td>
                     </tr>
                     <tr>
                         <td>Matter</td>
-                        <td>{product.matter}</td>
+                        <td>{products?.matter}</td>
                     </tr>
                     <tr>
                         <td>Fabrication Delay</td>
-                        <td>{product.delay}</td>
+                        <td>{products?.delay}</td>
                     </tr>
                 </tbody>
             </table>

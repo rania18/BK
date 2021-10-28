@@ -15,8 +15,8 @@ import {
 export const getProduct = (id) => async (dispatch) => {
     try {
       dispatch({ type: ONE_PRODUCT_LOADING });
-      const { data: { data } } = await api.fetchProduct(id);
-      dispatch({ type: ONE_PRODUCT, payload: { data } });
+      const { data } = await api.fetchProduct(id);
+      dispatch({ type: ONE_PRODUCT, payload:  data });
       dispatch({ type: ONE_PRODUCT_END_LOADING });
     } catch (error) {
       console.log(error);

@@ -7,7 +7,7 @@ import Select from '@material-ui/core/Select';
 import LoadingModule from '../LoadingModule';
 import MessageBox from '../MessageBox';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCategory, getCategories } from '../../../actions/categoryActions';
+// import { createCategory, getCategories } from '../../../actions/categoryActions';
 import Button from '@material-ui/core/Button';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import Title from './Title';
@@ -188,6 +188,7 @@ export default function ProductAdd(props) {
                                 <FormControl className='myform-control'>
                                     <InputLabel htmlFor="age-native-simple">Availability</InputLabel>
                                     <Select native value={formData.availability} onChange={(e) => setFormData({ ...formData, availability: e.target.value})}>
+                                        <option aria-label="Availability" value="Availability">Availability</option>
                                         <option aria-label="In Stock" value="In Stock">In Stock</option>
                                         <option aria-label="By Command" value="By Command">By Command</option>
                                         <option aria-label="Expired" value="Expired">Expired</option>
