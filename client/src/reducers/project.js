@@ -11,7 +11,7 @@ const projectReducers = (state = { OneProjectIsLoading: false, ProjectsIsLoading
         case ONE_PROJECT_END_LOADING:
             return { ...state, OneProjectIsLoading: false };
         case LIST_PROJECTS:
-            return { ...state, projects: action.payload.data };
+            return { ...state, projects: action.payload };
         case ONE_PROJECT:
          return { ...state, project: action.payload.data };
         case CREATE_PROJECT:

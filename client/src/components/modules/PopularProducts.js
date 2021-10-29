@@ -22,7 +22,7 @@ export default function PopularProducts() {
 
             <div className="products-container">
                 {
-                products?.map(product =>
+                products?.map((product) => 
                     <ProductBlock key={product?._id} product={product} />
                 )}
             </div>

@@ -27,7 +27,7 @@ export const getProjects = () => async (dispatch) => {
     try {
       dispatch({ type: START_LOADING_PROJECT });
       const  { data }  = await api.fetchProjects();
-      dispatch({ type: LIST_PROJECTS, payload:  data });
+      dispatch({ type: LIST_PROJECTS, payload: data });
       dispatch({ type: END_LOADING_PROJECT });
     } catch (error) {
       console.log(error);

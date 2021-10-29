@@ -34,7 +34,7 @@ export const updateCategory = (id, updatedCategory) => API.patch(`/api/categorie
 export const deleteCategory = (id) => API.delete(`/api/categories/${id}`);
 
 //project
-export const fetchProjects = () => API.get(`/api/projects`);
+export const fetchProjects = () => API.get('/api/projects');
 export const fetchProject = (id) => API.get(`/api/projects/${id}`);
 export const createProject = (newProject) => API.post('/api/projects/add', newProject);
 export const updateProject = (id, updatedProject) => API.patch(`/api/projects/edit/${id}`, updatedProject);

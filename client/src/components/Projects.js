@@ -32,11 +32,11 @@ export default function Projects() {
                 </div>
                 <div className='projects-page-container'>
                     {
-                        projects.map(item =>
+                        projects?.map(item =>
                             <div className='project-item' key={item._id}>
-                                <img src={item.image} alt={item.title} />
-                                <h3>{item.title}</h3>
-                                <p>{item.desc}</p>
+                                <img src={item?.image} alt={item?.title} />
+                                <h3>{item?.title}</h3>
+                                <p>{item?.desc}</p>
                             </div>
                         )
                     }

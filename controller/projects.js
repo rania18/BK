@@ -8,7 +8,7 @@ const router = express.Router();
 // GET ALL PROJECTS
 export const getAllProjects = async (req, res) => {
     const projects = await Project.find({});
-    //     res.send(projects);
+         res.send(projects);
 };
 
 // SEED PROJECTS FROM DATA.JS

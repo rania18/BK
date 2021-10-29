@@ -27,7 +27,7 @@ export default function Shop() {
         return (
             <div className="product-page">
                 <div className="head-page">
-                    <img src="/images/shop.png" alt="shop" />
+                    <img src="/images/factory.jpg" alt="shop" />
                     <Breadcrumbs bdcrumbs={bdcrumbs} />
                 </div>
                 <div className="maincategories-container">

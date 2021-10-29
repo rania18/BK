@@ -12,6 +12,7 @@ export default function Header(props) {
     const history = useHistory();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const location = useLocation();
+    const [scrolled, setScrolled] = useState(false)
 
     const logout = () => {
       dispatch({ type: actionType.LOGOUT });
@@ -29,6 +30,16 @@ export default function Header(props) {
       setUser(JSON.parse(localStorage.getItem('profile')));
       // eslint-disable-next-line
     }, [location]);
+
+    useEffect(() => {
+      document.addEventListener("scroll", () => {
+        if (window.scrollY > 15) {
+          setScrolled(true)
+        } else {
+          setScrolled(false)
+        }
+      })
+    })
 
     return (
         <header id="header" className={user?.result?.isAdmin && 'hideElement'}>
@@ -84,32 +95,34 @@ export default function Header(props) {
                 </ul>
               </nav>
             </div>
-            <div className='header'>
-              <div className="navigation">
-                <Link to="/">
-                  <div className="logo-container">
-                    <img src="/images/logo.png" alt="App Logo" className='logo' />
-                    {/* <h1>Belkhairat Trading</h1> */}
-                  </div>
-                </Link>
-              </div>
-              <div className='header-content'>
-              <img src="/images/logo.png" alt="logo" className='fixed-logo ' />
-                <nav className="menu-container">
-                  <ul>
-                    <li><Link to="/">Acceuil</Link></li>
-                    <li><a href="/shop">Shop</a></li>
-                    <li><a href="/projects">Projects</a></li>
-                    <li><a href="/blog">News</a></li>
-                    <li><a href="/gallery">Gallery</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                  </ul>
-                </nav>
-                <button className="mobile-menu">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="mobile-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-                  </svg>
-                </button>
+            <div className={scrolled ? 'scrolled' : ''}>
+              <div className='header' >
+                <div className="navigation">
+                  <Link to="/">
+                    {/* <div className="logo-container"> */}
+                      <img src="/images/logo.png" alt="App Logo" className='logo' />
+                      {/* <h1>Belkhairat Trading</h1> */}
+                    {/* </div> */}
+                  </Link>
+                </div>
+                <div className='header-content' >
+                <img src="/images/logo.png" alt="logo" className='fixed-logo ' />
+                  <nav className="menu-container">
+                    <ul>
+                      <li><Link to="/">Acceuil</Link></li>
+                      <li><a href="/shop">Shop</a></li>
+                      <li><a href="/projects">Projects</a></li>
+                      <li><a href="/blog">News</a></li>
+                      <li><a href="/gallery">Gallery</a></li>
+                      <li><a href="/contact">Contact</a></li>
+                    </ul>
+                  </nav>
+                  <button className="mobile-menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="mobile-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </header>

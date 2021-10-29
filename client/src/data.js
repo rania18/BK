@@ -207,27 +207,27 @@ export default {
     instagramImages: [
         {
             _id: '1',
-            image: "/images/instagram/square-1.jpg",
+            image: "/images/instagram/instagram1.jpg",
         },
         {
             _id: '2',
-            image: "/images/instagram/square-2.jpg",
+            image: "/images/instagram/instagram2.jpg",
         },
         {
             _id: '3',
-            image: "/images/instagram/square-3.jpg",
+            image: "/images/instagram/instagram3.jpg",
         },
         {
             _id: '4',
-            image: "/images/instagram/square-4.jpg",
+            image: "/images/instagram/instagram4.jpg",
         },
         {
             _id: '5',
-            image: "/images/instagram/square-5.jpg",
+            image: "/images/instagram/instagram5.jpg",
         },
         {
             _id: '6',
-            image: "/images/instagram/square-6.jpg",
+            image: "/images/instagram/instagram6.jpg",
         },
     ],
 
